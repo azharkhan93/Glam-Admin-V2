@@ -5,6 +5,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Account {
@@ -76,8 +77,7 @@ model Category {
   id       Int        @id @default(autoincrement())
   name     String
   parentId Int?
-  parent   Category?  @relation("Category", fields: [parentId], references: [id])
-  Category Category[] @relation("Category")
+  
 }
 
 

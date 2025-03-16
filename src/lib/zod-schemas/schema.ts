@@ -75,15 +75,19 @@ export const ZodProductSchema = z.object({
   // categoryId: z.string().refine((value) => /^\d+$/.test(value), {
   //   message: "invalid category id",
   // }),
-  basePrice: z.string().refine((value) => /^\d+$/.test(value), {
-    message: "Enter valid number",
-  }),
-  offerPrice: z.string().refine((value) => /^\d+$/.test(value), {
-    message: "Enter valid number",
-  }),
-  stock: z.string().refine((value) => /^\d+$/.test(value), {
-    message: "Enter valid number",
-  }),
+  basePrice: z.number().min(1, "Enter a valid number"),
+offerPrice: z.number().min(1, "Enter a valid number"),
+stock: z.number().min(0, "Enter a valid number"),
+
+  // basePrice: z.string().refine((value) => /^\d+$/.test(value), {
+  //   message: "Enter valid number",
+  // }),
+  // offerPrice: z.string().refine((value) => /^\d+$/.test(value), {
+  //   message: "Enter valid number",
+  // }),
+  // stock: z.string().refine((value) => /^\d+$/.test(value), {
+  //   message: "Enter valid number",
+  // }),
   colors: z
     .object({
       color: z.string(),
