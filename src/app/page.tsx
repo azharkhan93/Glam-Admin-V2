@@ -1,12 +1,12 @@
 import AuthForm from "@/components/forms/auth-form";
-import { authOptions } from "@/lib/auth";
+// import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { Card, CardBody } from "@nextui-org/react";
 
 const SignIn = async () => {
-  const session = await getServerSession(authOptions);
-  if (session?.user) redirect("/dashboard");
+  // const session = await getServerSession(authOptions);
+  // if (session?.user) redirect("/dashboard");
 
   return (
     <div className="flex min-h-screen w-full items-start justify-center md:py-20">

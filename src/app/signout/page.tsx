@@ -1,11 +1,11 @@
 import SignOutButton from "@/components/sign-out-button";
-import { authOptions } from "@/lib/auth";
+// import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 const SignOut = async () => {
-  const session = await getServerSession(authOptions);
-  if (!session) redirect("/");
+  // const session = await getServerSession(authOptions);
+  // if (!session) redirect("/");
 
   return (
     <div className="flex min-h-screen min-w-full items-center justify-center px-5">

@@ -12,53 +12,52 @@ import {
 import { useForm } from "react-hook-form";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-import { ZodAuthSchema } from "@/lib/zod-schemas/schema";
 import { motion as m } from "framer-motion";
 import { toast } from "sonner";
-import { signIn } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
+
+const dummyUsers = [
+  { email: "admin@mail.com", password: "admin123" },
+  { email: "user@mail.com", password: "user123" },
+];
 
 function AuthForm() {
   const [isPassword, setIsPassword] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [signInLoading, setSignInIsLoading] = useState(false);
-  const router = useRouter();
-  const callback = useSearchParams();
 
-  const form = useForm<z.infer<typeof ZodAuthSchema>>({
-    resolver: zodResolver(ZodAuthSchema),
+  const form = useForm({
+    resolver: zodResolver(
+      z.object({
+        email: z.string().email(),
+        password: z.string().min(6),
+      })
+    ),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  async function handleSignIn(data: z.infer<typeof ZodAuthSchema>) {
+  function handleSignIn(data: { email: string; password: string }) {
     setError(null);
     setSignInIsLoading(true);
 
-    try {
-      const signInResponse = await signIn("credentials", {
-        email: data.email,
-        password: data.password,
-        redirect: false,
-        callbackUrl: callback.get("callbackUrl") || "/dashboard",
-      });
+    const user = dummyUsers.find(
+      (u) => u.email === data.email && u.password === data.password
+    );
 
-      if (signInResponse?.error) {
+    setTimeout(() => {
+      if (!user) {
+        setError("Invalid credentials.");
         form.reset();
-        throw new Error("Invalid credentials.");
+      } else {
+        localStorage.setItem("user", JSON.stringify(user));
+        toast.success("Signed in successfully.");
       }
-      toast.success("Signed in successfully. redirecting...");
-      router.refresh();
-      router.replace(signInResponse?.url || "/");
-    } catch (error: any) {
-      setError(error.message);
-    } finally {
       setSignInIsLoading(false);
-    }
+    }, 1000);
   }
 
   return (
@@ -112,9 +111,7 @@ function AuthForm() {
           <m.span
             initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.3,
-            }}
+            transition={{ duration: 0.3 }}
             className="mt-3 block h-5 text-center text-xs font-medium text-destructive dark:text-red-500"
           >
             {error}
@@ -132,24 +129,12 @@ function AuthForm() {
           >
             Sign in
           </Button>
-          <Button
-            color="primary"
-            isDisabled={signInLoading}
-            radius="full"
-            onClick={() =>
-              handleSignIn({
-                email: "guest.admin@mail.com",
-                password: "admin123",
-              })
-            }
-            variant="light"
-            type="button"
-          >
-            Sign in as Guest
-          </Button>
+      
+         
         </div>
       </form>
     </Form>
   );
 }
 export default AuthForm;
+

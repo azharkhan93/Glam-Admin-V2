@@ -1,4 +1,4 @@
-import { authOptions } from "@/lib/auth";
+// import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/prisma";
 import {
   error400,
@@ -14,11 +14,11 @@ import { z } from "zod";
 
 export async function GET() {
   try {
-    const session = await getServerSession(authOptions);
+    // const session = await getServerSession(authOptions);
 
-    if (!session || !session.user || !session.user.id) {
-      return error401("Unauthorized");
-    }
+    // if (!session || !session.user || !session.user.id) {
+    //   return error401("Unauthorized");
+    // }
 
     const categories = await db.category.findMany({
       include: {
@@ -43,15 +43,15 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
+    // const session = await getServerSession(authOptions);
 
-    if (!session || !session.user || !session.user.id) {
-      return error401("Unauthorized");
-    }
+    // if (!session || !session.user || !session.user.id) {
+    //   return error401("Unauthorized");
+    // }
 
-    if (session.user.role !== "SUPERADMIN") {
-      return error403();
-    }
+    // if (session.user.role !== "SUPERADMIN") {
+    //   return error403();
+    // }
 
     const data: z.infer<typeof ZodCategorySchema> = await req.json();
     if (!data) {
@@ -78,15 +78,15 @@ export async function POST(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
+    // const session = await getServerSession(authOptions);
 
-    if (!session || !session.user || !session.user.id) {
-      return error401("Unauthorized");
-    }
+    // if (!session || !session.user || !session.user.id) {
+    //   return error401("Unauthorized");
+    // }
 
-    if (session.user.role !== "SUPERADMIN") {
-      return error403();
-    }
+    // if (session.user.role !== "SUPERADMIN") {
+    //   return error403();
+    // }
 
     const cid = req.nextUrl.searchParams.get("cid");
     if (!cid) {
@@ -108,15 +108,15 @@ export async function DELETE(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
+    // const session = await getServerSession(authOptions);
 
-    if (!session || !session.user || !session.user.id) {
-      return error401("Unauthorized");
-    }
+    // if (!session || !session.user || !session.user.id) {
+    //   return error401("Unauthorized");
+    // }
 
-    if (session.user.role !== "SUPERADMIN") {
-      return error403();
-    }
+    // if (session.user.role !== "SUPERADMIN") {
+    //   return error403();
+    // }
 
     const data:
       | {

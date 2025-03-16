@@ -3,9 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Account {
@@ -46,14 +45,6 @@ model Address {
   @@index([userId], map: "user_id_index")
 }
 
-model Admin {
-  id       String    @id @default(cuid())
-  name     String
-  email    String    @unique
-  password String
-  role     AdminRole @default(SUPERADMIN)
-}
-
 model BestDeal {
   id          Int    @id @default(autoincrement())
   imageUrl    String
@@ -66,12 +57,9 @@ model BestDeal {
 model Cart {
   id          Int        @id @default(autoincrement())
   userId      String?    @unique
-  guestUserId String?    @unique
-  GuestUser   GuestUser? @relation(fields: [guestUserId], references: [id])
   User        User?      @relation(fields: [userId], references: [id])
   CartItem    CartItem[]
 
-  @@index([guestUserId], map: "guestUserId_index")
   @@index([userId], map: "userId_index")
 }
 
@@ -82,7 +70,6 @@ model CartItem {
   cartId    Int
   color     String?
   Cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
-  Product   Product @relation(fields: [productId], references: [id])
 }
 
 model Category {
@@ -91,14 +78,9 @@ model Category {
   parentId Int?
   parent   Category?  @relation("Category", fields: [parentId], references: [id])
   Category Category[] @relation("Category")
-  Product  Product[]
 }
 
-model GuestUser {
-  id             String   @id
-  expirationDate DateTime
-  Cart           Cart?
-}
+
 
 model HeroBanner {
   id          Int    @id @default(autoincrement())
@@ -145,7 +127,6 @@ model OrderItem {
   basePrice  Float
   offerPrice Float
   Order      Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  Product    Product @relation(fields: [productId], references: [id])
 
   @@index([orderId], map: "orderId_index")
   @@index([productId], map: "productId_index")
@@ -167,7 +148,6 @@ model Product {
   slug             String
   title            String
   description      String
-  categoryId       Int
   basePrice        Float
   offerPrice       Float
   stock            Int
@@ -176,24 +156,13 @@ model Product {
   variantValues    String?
   createdAt        DateTime    @default(now())
   shortDescription String?
-  purchases        Int         @default(0)
   keywords         String[]
-  earnings         Float       @default(0)
-  CartItem         CartItem[]
   Image            Image[]
-  OrderItem        OrderItem[]
-  Category         Category    @relation(fields: [categoryId], references: [id])
 
   @@index([slug], map: "product_slug_index")
 }
 
-model Session {
-  id           String   @id
-  expires      DateTime
-  sessionToken String   @unique
-  userId       String
-  User         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
+
 
 model User {
   id            String    @id @default(cuid())
@@ -211,7 +180,6 @@ model User {
   Address       Address[]
   Cart          Cart?
   Order         Order[]
-  Session       Session[]
 }
 
 model VerificationToken {
@@ -226,10 +194,4 @@ model MarqueeOffers {
   id    Int    @id @default(autoincrement())
   title String
   url   String
-}
-
-enum AdminRole {
-  SUPERADMIN
-  GUEST
-  ADMIN
 }

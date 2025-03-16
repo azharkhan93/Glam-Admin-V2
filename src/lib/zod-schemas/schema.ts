@@ -72,9 +72,9 @@ export const ZodProductSchema = z.object({
     .string()
     .min(10, "Value must be 10 or more characters long")
     .max(1000, "Value must be less than 1000 characters long"),
-  categoryId: z.string().refine((value) => /^\d+$/.test(value), {
-    message: "invalid category id",
-  }),
+  // categoryId: z.string().refine((value) => /^\d+$/.test(value), {
+  //   message: "invalid category id",
+  // }),
   basePrice: z.string().refine((value) => /^\d+$/.test(value), {
     message: "Enter valid number",
   }),
