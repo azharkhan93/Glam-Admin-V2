@@ -72,22 +72,23 @@ export const ZodProductSchema = z.object({
     .string()
     .min(10, "Value must be 10 or more characters long")
     .max(1000, "Value must be less than 1000 characters long"),
-  // categoryId: z.string().refine((value) => /^\d+$/.test(value), {
-  //   message: "invalid category id",
-  // }),
-  basePrice: z.number().min(1, "Enter a valid number"),
-offerPrice: z.number().min(1, "Enter a valid number"),
-stock: z.number().min(0, "Enter a valid number"),
-
-  // basePrice: z.string().refine((value) => /^\d+$/.test(value), {
-  //   message: "Enter valid number",
-  // }),
-  // offerPrice: z.string().refine((value) => /^\d+$/.test(value), {
-  //   message: "Enter valid number",
-  // }),
-  // stock: z.string().refine((value) => /^\d+$/.test(value), {
-  //   message: "Enter valid number",
-  // }),
+  categoryId: z
+    .string()
+    .refine((value) => /^\d+$/.test(value), {
+      message: "Invalid category id",
+    }),
+  basePrice: z.preprocess(
+    (val) => Number(val),
+    z.number().min(1, "Enter a valid number")
+  ),
+  offerPrice: z.preprocess(
+    (val) => Number(val),
+    z.number().min(1, "Enter a valid number")
+  ),
+  stock: z.preprocess(
+    (val) => Number(val),
+    z.number().min(0, "Enter a valid number")
+  ),
   colors: z
     .object({
       color: z.string(),
@@ -97,20 +98,102 @@ stock: z.number().min(0, "Enter a valid number"),
     .array(),
   variantName: z.string().optional(),
   variantValues: z.string().optional(),
-  keywords: z.string().refine(
-    (data) => {
-      const values = data.split(",").map((value) => value.trim());
-      return values.length <= 10;
-    },
-    {
-      message: "Maximum 10 keywords!",
-    },
-  ),
+  keywords: z
+    .string()
+    .refine(
+      (data) => {
+        const values = data.split(",").map((value) => value.trim());
+        return values.length <= 10;
+      },
+      {
+        message: "Maximum 10 keywords!",
+      }
+    ),
 });
+
+
+
+// export const ZodProductSchema = z.object({
+//   title: z
+//     .string()
+//     .min(5, "Value must be 5 or more characters long")
+//     .max(100, "Value must be less than 100 characters long"),
+
+//   slug: z
+//     .string()
+//     .min(5, "Value must be 5 or more characters long")
+//     .max(100, "Value must be less than 100 characters long"),
+
+//   shortDescription: z
+//     .string()
+//     .max(150, "Value must be less than 150 characters long")
+//     .optional(),
+
+//   description: z
+//     .string()
+//     .min(10, "Value must be 10 or more characters long")
+//     .max(1000, "Value must be less than 1000 characters long"),
+
+//   // categoryId is a string and should be validated as a valid string ID
+//   categoryId: z
+//     .string()
+//     .refine((value) => /^\d+$/.test(value), { message: "Invalid category ID" }),
+
+//   basePrice: z
+//     .number()
+//     .int("Base price must be an integer")
+//     .min(1, "Enter a valid base price"),
+
+//   offerPrice: z
+//     .number()
+//     .int("Offer price must be an integer")
+//     .min(1, "Enter a valid offer price"),
+
+//   stock: z
+//     .number()
+//     .int("Stock must be an integer")
+//     .min(0, "Enter a valid stock number"),
+
+//   color: z.string().optional(),
+
+//   variantName: z.string().optional(),
+
+//   variantValues: z.string().optional(),
+
+//   purchases: z
+//     .number()
+//     .int("Purchases must be an integer")
+//     .default(0),
+
+//   earnings: z
+//     .number()
+//     .int("Earnings must be an integer")
+//     .default(0),
+
+  
+//   keywords: z
+//     .string()
+//     .refine((data) => {
+//       const values = data.split(",").map((value) => value.trim());
+//       return values.length <= 10;
+//     }, { message: "Maximum 10 keywords!" }),
+
+  
+//   colors: z
+//     .object({
+//       color: z.string(),
+//       thumbnail: z.string(),
+//       others: z.string().array(),
+//     })
+//     .array(),
+
+  
+// });
+
 
 export const ZodCategorySchema = z.object({
   category: z.string(),
-  parentId: z.string(),
+  parentId: z.string().optional()
 });
 
 export const ZodBestDealSchema = z.object({
@@ -140,3 +223,44 @@ export const ZodHeroBannerSchema = z.object({
   basePrice: z.string(),
   offerPrice: z.string(),
 });
+
+
+
+
+// id               String      @id @default(cuid())
+//   slug             String
+//   title            String
+//   description      String
+//   categoryId       Int
+//   basePrice        Float
+//   offerPrice       Float
+//   stock            Int
+//   color            String?
+//   variantName      String?
+//   variantValues    String?
+//   createdAt        DateTime    @default(now())
+//   shortDescription String?
+//   purchases        Int         @default(0)
+//   keywords         String[]
+//   earnings         Float       @default(0)
+//   CartItem         CartItem[]
+//   Image            Image[]
+//   OrderItem        OrderItem[]
+//   Category         Category    @relation(fields: [categoryId], references: [id])
+
+// model Category {
+//   id       Int        @id @default(autoincrement())
+//   name     String
+//   parentId Int?
+//   parent   Category?  @relation("Category", fields: [parentId], references: [id])
+//   Category Category[] @relation("Category")
+//   Product  Product[]
+// }
+// model Image {
+//   id            Int     @id @default(autoincrement())
+//   imagePublicId String
+//   productId     String
+//   Product       Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+//   @@unique([productId, id])
+// }

@@ -127,6 +127,27 @@ type OrderResProps = Res & {
   orders: OrderProps[];
 };
 
+
+// For example, in a types file (e.g., src/lib/types/product.ts)
+type ProductFormData = {
+  title: string;
+  slug: string;
+  shortDescription: string;
+  description: string;
+  categoryId: string;
+  stock: string;
+  basePrice: string;
+  offerPrice: string;
+  colors: any[]; // Update with a more specific type as needed
+  variantName: string;
+  variantValues: string;
+  keywords: string;
+  // Optionally, include order-related properties if needed:
+  OrderItem?: { basePrice: number }[];
+  total?: number;
+}
+
+
 type CustomerOrderProps = {
   oid: string;
   amount: number;
@@ -171,8 +192,8 @@ type ProductOrdersResProps = Res & {
   orders: (OrderItem & { Order: Order })[];
 };
 
-type ProductFormProps = {
-  form: UseFormReturn<z.infer<typeof ZodProductSchema>, any, undefined>;
+ type ProductFormProps = {
+  form: UseFormReturn<any>;
 };
 
 type EditProductProps = {
@@ -309,4 +330,5 @@ export type {
   ColorVariantRes,
   DealsAndOffers,
   DealsAndOffersRes,
+  ProductFormData
 };

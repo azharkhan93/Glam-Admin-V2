@@ -3,6 +3,9 @@ import OrderItemsTable from "./order-items-table";
 import PriceDetails from "./price-details";
 import { SingleOrder } from "@/lib/types/types";
 
+
+
+
 const ProductDetails = ({ data }: { data: SingleOrder }) => {
   function calculateSubtotal() {
     return data.OrderItem.reduce((acc, curr) => curr.basePrice + acc, 0);

@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { z } from "zod";
 
-async function handleCreate(values: z.infer<typeof ZodProductSchema>) {
+async function handleCreate(values: any) {
   const { data } = await axios.post("/api/products", values);
   return data as AddProductResProps;
 }

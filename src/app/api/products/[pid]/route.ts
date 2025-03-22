@@ -1,5 +1,4 @@
 import { cloudinary } from "@/config/cloudinary.config";
-import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/prisma";
 import {
   error400,
@@ -20,15 +19,9 @@ async function deleteImage(publicId: string) {
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { pid: string } },
+  { params }: { params: { pid: string } }
 ) {
   try {
-    const session = await getServerSession(authOptions);
-
-    if (!session || !session.user || !session.user.id) {
-      return error401("Unauthorized");
-    }
-
     const pid = params.pid;
     if (!pid || pid.length < 20) {
       return error400("Invalid product ID", {});
@@ -55,19 +48,9 @@ export async function GET(
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { pid: string } },
+  { params }: { params: { pid: string } }
 ) {
   try {
-    const session = await getServerSession(authOptions);
-
-    if (!session || !session.user || !session.user.id) {
-      return error401("Unauthorized");
-    }
-
-    if (session.user.role !== "SUPERADMIN") {
-      return error403();
-    }
-
     const pid = params.pid;
     if (!pid || pid.length < 20) {
       return error400("Invalid product ID", {});
@@ -130,9 +113,9 @@ export async function PUT(
           shortDescription:
             data.shortDescription === "" ? null : data.shortDescription,
           description: data.description,
-          basePrice: parseInt(data.basePrice),
-          offerPrice: parseInt(data.offerPrice),
-          stock: parseInt(data.stock),
+          basePrice: data.basePrice,
+          offerPrice: data.offerPrice,
+          stock: data.stock,
           categoryId: parseInt(data.categoryId),
           variantName: data.variantName,
           variantValues: data.variantValues?.replace(/\s/g, ""),
@@ -153,18 +136,10 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { pid: string } },
+  { params }: { params: { pid: string } }
 ) {
   try {
-    const session = await getServerSession(authOptions);
-
-    if (!session || !session.user || !session.user.id) {
-      return error401("Unauthorized");
-    }
-
-    if (session.user.role !== "SUPERADMIN") {
-      return error403();
-    }
+    
 
     const pid = params.pid;
     if (!pid || pid.length < 20) {
@@ -190,11 +165,11 @@ export async function DELETE(
 
     // Create an array of promises to delete each image
     const deletePromises: Promise<any>[] = result.resources.map(
-      (resource: any) => deleteImage(resource.public_id),
+      (resource: any) => deleteImage(resource.public_id)
     );
     deletePromises.push(
       db.product.delete({ where: { id: pid } }),
-      cloudinary.api.delete_folder(`products/${dbProduct.slug}`),
+      cloudinary.api.delete_folder(`products/${dbProduct.slug}`)
     );
 
     // Use Promise.all to execute all delete promises in parallel

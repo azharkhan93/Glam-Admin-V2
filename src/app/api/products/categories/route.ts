@@ -43,39 +43,30 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    // const session = await getServerSession(authOptions);
+    // Parse the incoming JSON data from the request
+    const data = await req.json();
+    console.log("Received category data:", data);
 
-    // if (!session || !session.user || !session.user.id) {
-    //   return error401("Unauthorized");
-    // }
+    // Create the category in the database.
+    // If parentId is empty or not provided, use null.
+    await db.category.create({
+      data: {
+        name: data.category,
+        parentId: data.parentId && data.parentId.trim() !== "" 
+          ? Number(data.parentId)
+          : null,
+      },
+    });
 
-    // if (session.user.role !== "SUPERADMIN") {
-    //   return error403();
-    // }
-
-    const data: z.infer<typeof ZodCategorySchema> = await req.json();
-    if (!data) {
-      return error400("Invalid data format.", {});
-    }
-    const result = ZodCategorySchema.safeParse(data);
-
-    if (result.success) {
-      await db.category.create({
-        data: {
-          name: data.category,
-          parentId: Number(data.parentId),
-        },
-      });
-      return success200({});
-    }
-    if (result.error) {
-      return error400("Invalid data format.", {});
-    }
+    return success200({});
   } catch (error) {
+    console.error("Error creating category:", error);
     return error500({ product: null });
   }
 }
 
+
+    
 export async function DELETE(req: NextRequest) {
   try {
     // const session = await getServerSession(authOptions);
