@@ -40,11 +40,12 @@ export default async function Home() {
         </div>
         <div className="my-10 grid grid-cols-1 px-3 @3xl:grid-cols-2 md:gap-3">
           <TopSources />
-          <TopPages />
+          <RecentActivities />
+          {/* <TopPages /> */}
         </div>
         <div className="my-10 grid grid-cols-1 px-3 @3xl:grid-cols-2 md:gap-3">
-          <TopStateBySales />
-          <RecentActivities />
+          {/* <TopStateBySales /> */}
+          
         </div>
       </div>
     </Nav>
