@@ -9,8 +9,8 @@ import { GlobalContextProvider } from "@/context/store";
 import Loading from "./loading";
 
 export const metadata: Metadata = {
-  title: "Admin GadgeXhub",
-  description: "Discover the Latest Gadgets: Your One-Stop Gadget Shop!",
+  title: "Glam Squad Inventory",
+  description: "Discover the Latest Salon Services: At Home!",
 };
 
 export default async function RootLayout({

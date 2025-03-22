@@ -40,7 +40,7 @@ const AddProductForm = () => {
 
   useEffect(() => {
     setColorVariants([]);
-  }, []);
+  }, [setColorVariants]);
 
   const onSuccess = () => {
     toast.success("Product added successfully.");

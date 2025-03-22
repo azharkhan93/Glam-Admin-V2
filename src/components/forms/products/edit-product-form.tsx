@@ -48,7 +48,7 @@ const EditProductForm = ({ product }: { product: EditProductProps }) => {
         ),
       }))
     );
-  }, []);
+  }, [product.colorVariants, setColorVariants]);
 
   const edit_product_mutation = useEditProduct();
 

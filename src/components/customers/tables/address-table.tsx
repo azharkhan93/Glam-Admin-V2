@@ -88,6 +88,7 @@ export default function AddressTable() {
     }
 
     return filteredAddresses;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addressData, filterValue]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
@@ -238,14 +239,7 @@ export default function AddressTable() {
         </div>
       </div>
     );
-  }, [
-    filterValue,
-    visibleColumns,
-    onSearchChange,
-    onRowsPerPageChange,
-    addressData?.addresses.length,
-    hasSearchFilter,
-  ]);
+  }, [visibleColumns, onRowsPerPageChange, addressData?.addresses.length]);
 
   const bottomContent = React.useMemo(() => {
     return (
@@ -279,7 +273,7 @@ export default function AddressTable() {
         </div>
       </div>
     );
-  }, [items.length, page, pages, hasSearchFilter]);
+  }, [page, pages, onPreviousPage, onNextPage]);
 
   return (
     <Table
