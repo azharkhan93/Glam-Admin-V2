@@ -12,7 +12,7 @@ export async function getAddressesServer() {
       // },
     });
 
-    console.log("Fetched addresses:", data); // Debugging
+    console.log("Fetched addresses:", data); 
 
     return Array.isArray(data) ? data : []; // Ensure always returning an array
   } catch (error) {

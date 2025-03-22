@@ -15,9 +15,9 @@ const page = async () => {
   return (
     <Nav>
       <h1 className="text-xl text-zinc-400">All Addresses</h1>
-      <Hydrate state={dehydratedState}>
+      {/* <Hydrate state={dehydratedState} > */}
         <AddressTable />
-      </Hydrate>
+      {/* </Hydrate> */}
     </Nav>
   );
 };
