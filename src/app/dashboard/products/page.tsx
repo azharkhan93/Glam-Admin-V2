@@ -5,6 +5,7 @@ import { QueryClient } from "@tanstack/react-query";
 import Tabs from "@/components/products/tabs";
 import { getProductsServer } from "@/lib/api/products/get-products";
 import ProductsTable from "@/components/products/products-table";
+import ProtectedAuth from "@/components/ProtectedAuth/ProtectedAuth";
 
 const Products = async () => {
   const queryClient = new QueryClient();
@@ -15,6 +16,7 @@ const Products = async () => {
   const dehydratedState = dehydrate(queryClient);
 
   return (
+    <ProtectedAuth>
     <Nav>
       <Tabs>
         <Hydrate state={dehydratedState}>
@@ -22,6 +24,7 @@ const Products = async () => {
         </Hydrate>
       </Tabs>
     </Nav>
+    </ProtectedAuth>
   );
 };
 

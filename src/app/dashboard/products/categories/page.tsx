@@ -1,3 +1,4 @@
+import ProtectedAuth from "@/components/ProtectedAuth/ProtectedAuth";
 import CategoriesTable from "@/components/categories/table";
 import CreateCategory from "@/components/dialog/category/create-category";
 import Nav from "@/components/nav/nav";
@@ -14,6 +15,7 @@ const Categories = async () => {
   const dehydratedState = dehydrate(queryClient);
 
   return (
+    <ProtectedAuth>
     <Nav>
       <div className="flex items-center justify-between">
         <h1 className="my-5 text-xl text-zinc-400">Categories</h1>
@@ -23,6 +25,7 @@ const Categories = async () => {
         <CategoriesTable />
       </Hydrate>
     </Nav>
+    </ProtectedAuth>
   );
 };
 

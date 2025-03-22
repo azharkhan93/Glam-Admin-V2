@@ -1,3 +1,4 @@
+import ProtectedAuth from "@/components/ProtectedAuth/ProtectedAuth";
 import Nav from "@/components/nav/nav";
 import ProductTemplate from "@/components/product-details/product-template";
 import Tabs from "@/components/product-details/tabs";
@@ -17,6 +18,9 @@ const ProductPage = async ({
   );
 
   return (
+    <ProtectedAuth>
+
+    
     <Nav>
       <Tabs pid={params.pid} product={product}>
         <ProductTemplate
@@ -45,6 +49,7 @@ const ProductPage = async ({
         />
       </Tabs>
     </Nav>
+    </ProtectedAuth>
   );
 };
 

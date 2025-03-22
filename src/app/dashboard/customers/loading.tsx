@@ -1,12 +1,12 @@
 import { Card, CardBody } from "@nextui-org/react";
-import { Loader2 } from "lucide-react";
+import { Loader2, RotateCw } from "lucide-react";
 
 const Loading = () => {
   return (
-    <div className="fixed z-[9999] flex min-h-screen min-w-full items-center justify-center bg-black/50">
-      <Card className="rounded-md">
+    <div className="fixed z-[9999] flex min-h-screen min-w-full items-center justify-center bg-white">
+      <Card className=" py-2 px-2 bg-white shadow-none">
         <CardBody>
-          <Loader2 className="animate-spin" />
+          <RotateCw className="animate-spin text-blue-600"  strokeWidth={3} size={45}/>
         </CardBody>
       </Card>
     </div>
