@@ -5,7 +5,7 @@ import { NextRequest } from "next/server";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-const SECRET_KEY = process.env.JWT_SECRET || "your_default_secret_key";
+const SECRET_KEY = process.env.JWT_SECRET || "secret_key";
 
 export async function POST(req: NextRequest) {
   try {
@@ -31,11 +31,10 @@ export async function POST(req: NextRequest) {
         },
       });
 
-      // Generate JWT token for the first admin
+     
       const token = jwt.sign(
         { id: newAdmin.id, email: newAdmin.email },
         SECRET_KEY,
-        { expiresIn: "1h" }
       );
 
       return success200({ message: "Admin registered successfully", token });
