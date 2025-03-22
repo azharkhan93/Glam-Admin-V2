@@ -79,7 +79,10 @@ export default function AddressTable() {
   }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
-    let filteredAddresses = [...addressData?.addresses!];
+    let filteredAddresses = Array.isArray(addressData?.addresses)
+      ? [...addressData.addresses]
+      : [];
+    // let filteredAddresses = [...addressData?.addresses!];
 
     if (hasSearchFilter) {
       filteredAddresses = filteredAddresses.filter((address) =>
@@ -101,8 +104,8 @@ export default function AddressTable() {
   }, [page, filteredItems, rowsPerPage]);
   const sortedItems = React.useMemo(() => {
     return [...items].sort((a: Address, b: Address) => {
-      const first = a[sortDescriptor.column as keyof Address];
-      const second = b[sortDescriptor.column as keyof Address];
+      const first = a[sortDescriptor.column as keyof Address] ?? "";
+      const second = b[sortDescriptor.column as keyof Address] ?? "";
   
       if (typeof first === "string" && typeof second === "string") {
         return sortDescriptor.direction === "descending"
@@ -114,9 +117,28 @@ export default function AddressTable() {
         return sortDescriptor.direction === "descending" ? second - first : first - second;
       }
   
-      return 0;
+      return 0; // Default case when types are mismatched or undefined
     });
   }, [sortDescriptor, items]);
+  
+  // const sortedItems = React.useMemo(() => {
+  //   return [...items].sort((a: Address, b: Address) => {
+  //     const first = a[sortDescriptor.column as keyof Address];
+  //     const second = b[sortDescriptor.column as keyof Address];
+  
+  //     if (typeof first === "string" && typeof second === "string") {
+  //       return sortDescriptor.direction === "descending"
+  //         ? second.localeCompare(first)
+  //         : first.localeCompare(second);
+  //     }
+  
+  //     if (typeof first === "number" && typeof second === "number") {
+  //       return sortDescriptor.direction === "descending" ? second - first : first - second;
+  //     }
+  
+  //     return 0;
+  //   });
+  // }, [sortDescriptor, items]);
   
 
   // const sortedItems = React.useMemo(() => {
@@ -239,7 +261,8 @@ export default function AddressTable() {
         </div>
       </div>
     );
-  }, [visibleColumns, onRowsPerPageChange, addressData?.addresses.length]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visibleColumns, onRowsPerPageChange, addressData?.addresses?.length ?? 0]);
 
   const bottomContent = React.useMemo(() => {
     return (
