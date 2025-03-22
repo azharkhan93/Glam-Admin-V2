@@ -17,9 +17,11 @@ import TopSources from "@/components/dashboard/top-sources";
 import TopPages from "@/components/dashboard/top-pages";
 import DeviceOrigin from "@/components/dashboard/device-origin/device-origin";
 import VisitDetails from "@/components/dashboard/visit-details/visit-details";
+import ProtectedAuth from "@/components/ProtectedAuth/ProtectedAuth";
 
 export default async function Home() {
   return (
+    <ProtectedAuth>
     <Nav>
       <div className="@container">
         <div className="grid grid-cols-1 gap-3 @md:grid-cols-2 @4xl:grid-cols-4">
@@ -49,5 +51,6 @@ export default async function Home() {
         </div>
       </div>
     </Nav>
+    </ProtectedAuth>
   );
 }

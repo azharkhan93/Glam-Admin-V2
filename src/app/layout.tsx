@@ -7,6 +7,7 @@ import QueryProvider from "@/providers/query-provider";
 // import AutoSignOutProvider from "@/providers/auto-signout-provider";
 import { GlobalContextProvider } from "@/context/store";
 import Loading from "./loading";
+import ProtectedAuth from "@/components/ProtectedAuth/ProtectedAuth";
 
 export const metadata: Metadata = {
   title: "Glam Squad Inventory",
@@ -18,6 +19,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body className="bg-gray-100 font-poppins dark:bg-[#020817]">
@@ -25,7 +27,11 @@ export default async function RootLayout({
           <AutoSignOutProvider> */}
             <QueryProvider>
               <GlobalContextProvider>
-                <NextUIProvider>{children}</NextUIProvider>
+                <NextUIProvider>
+                  {/* <ProtectedAuth> */}
+                  {children}
+                  {/* </ProtectedAuth> */}
+                  </NextUIProvider>
               </GlobalContextProvider>
             </QueryProvider>
           {/* </AutoSignOutProvider>
