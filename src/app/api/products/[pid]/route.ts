@@ -116,7 +116,7 @@ export async function PUT(
           basePrice: data.basePrice,
           offerPrice: data.offerPrice,
           stock: data.stock,
-          categoryId: parseInt(data.categoryId),
+          categoryId: data.categoryId,
           variantName: data.variantName,
           variantValues: data.variantValues?.replace(/\s/g, ""),
           keywords: data.keywords.replace(/\s/g, "").split(","),

@@ -23,10 +23,14 @@ const EditProductForm = ({ product }: { product: EditProductProps }) => {
       slug: product.slug,
       shortDescription: product.shortDescription || "",
       description: product.description,
-      categoryId: product.categoryId.toString(),
-      stock: product.stock.toString(),
-      basePrice: product.basePrice.toString(),
-      offerPrice: product.offerPrice.toString(),
+      categoryId: product.categoryId, // ✅ Keep as number
+      // stock: product.stock, // ✅ Keep as number
+      basePrice: product.basePrice, // ✅ Keep as number
+      offerPrice: product.offerPrice,
+      // categoryId: product.categoryId.toString(),
+      //  stock: product.stock,
+      // basePrice: product.basePrice.toString(),
+      // offerPrice: product.offerPrice.toString(),
       colors: [{}],
       variantName: product.variantName || "",
       variantValues: product.variantValues || "",
@@ -40,9 +44,9 @@ const EditProductForm = ({ product }: { product: EditProductProps }) => {
         color: color.color || "Default",
         thumbnail: process.env.NEXT_PUBLIC_IMAGE_URL + color.thumbnail.url!,
         others: color.others.map(
-          (val) => process.env.NEXT_PUBLIC_IMAGE_URL + val.url,
+          (val) => process.env.NEXT_PUBLIC_IMAGE_URL + val.url
         ),
-      })),
+      }))
     );
   }, []);
 

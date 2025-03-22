@@ -23,9 +23,9 @@ const EditProfileForm = ({ onClose }: { onClose: () => void }) => {
 
   const form = useForm<z.infer<typeof ZodProfileSchema>>({
     resolver: zodResolver(ZodProfileSchema),
-    defaultValues: {
-      name: session?.user.name,
-    },
+    // defaultValues: {
+    //   name: session?.user.name,
+    // },
   });
 
   async function updateSession(updatedData: z.infer<typeof ZodProfileSchema>) {

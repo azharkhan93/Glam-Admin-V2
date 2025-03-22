@@ -23,10 +23,14 @@ const AddProductForm = () => {
       slug: "",
       shortDescription: "",
       description: "",
-      categoryId: "",
-      stock: "",
-      basePrice: "",
-      offerPrice: "",
+      categoryId: 0, // Ensure it's a number
+      stock: 0,      // Ensure it's a number
+      basePrice: 0,  // Ensure it's a number
+      offerPrice: 0,
+      // categoryId: "",
+      // stock: "",
+      // basePrice: "",
+      // offerPrice: "",
       colors: [{}],
       variantName: "",
       variantValues: "",

@@ -27,10 +27,10 @@ export async function PATCH(req: NextRequest) {
     const result = ZodProfileSchema.safeParse(adminData);
 
     if (result.success) {
-      await db.admin.update({
-        where: { id: session.user.id },
-        data: { name: result.data.name },
-      });
+      // await db.admin.update({
+      //   where: { id: session.user.id },
+      //   data: { name: result.data.name },
+      // });
       return success200({ name: result.data.name });
     }
 

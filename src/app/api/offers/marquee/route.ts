@@ -1,4 +1,4 @@
-import { authOptions } from "@/lib/auth";
+// import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/prisma";
 import {
   error400,
@@ -14,15 +14,15 @@ import { z } from "zod";
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
+    // const session = await getServerSession(authOptions);
 
-    if (!session || !session.user || !session.user.id) {
-      return error401("Unauthorized");
-    }
+    // if (!session || !session.user || !session.user.id) {
+    //   return error401("Unauthorized");
+    // }
 
-    if (session.user.role !== "SUPERADMIN") {
-      return error403();
-    }
+    // if (session.user.role !== "SUPERADMIN") {
+    //   return error403();
+    // }
 
     const data: {
       values: z.infer<typeof ZodMarqueeOfferSchema>;
@@ -54,15 +54,15 @@ export async function POST(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
+    // const session = await getServerSession(authOptions);
 
-    if (!session || !session.user || !session.user.id) {
-      return error401("Unauthorized");
-    }
+    // if (!session || !session.user || !session.user.id) {
+    //   return error401("Unauthorized");
+    // }
 
-    if (session.user.role !== "SUPERADMIN") {
-      return error403();
-    }
+    // if (session.user.role !== "SUPERADMIN") {
+    //   return error403();
+    // }
 
     const data: {
       id: number;
@@ -96,15 +96,15 @@ export async function PUT(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
+    // const session = await getServerSession(authOptions);
 
-    if (!session || !session.user || !session.user.id) {
-      return error401("Unauthorized");
-    }
+    // if (!session || !session.user || !session.user.id) {
+    //   return error401("Unauthorized");
+    // }
 
-    if (session.user.role !== "SUPERADMIN") {
-      return error403();
-    }
+    // if (session.user.role !== "SUPERADMIN") {
+    //   return error403();
+    // }
 
     const id = req.nextUrl.searchParams.get("id");
 

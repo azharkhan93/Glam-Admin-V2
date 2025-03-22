@@ -98,16 +98,35 @@ export default function AddressTable() {
 
     return filteredItems.slice(start, end);
   }, [page, filteredItems, rowsPerPage]);
-
   const sortedItems = React.useMemo(() => {
     return [...items].sort((a: Address, b: Address) => {
-      const first = a[sortDescriptor.column as keyof Address] as number;
-      const second = b[sortDescriptor.column as keyof Address] as number;
-      const cmp = first < second ? -1 : first > second ? 1 : 0;
-
-      return sortDescriptor.direction === "descending" ? -cmp : cmp;
+      const first = a[sortDescriptor.column as keyof Address];
+      const second = b[sortDescriptor.column as keyof Address];
+  
+      if (typeof first === "string" && typeof second === "string") {
+        return sortDescriptor.direction === "descending"
+          ? second.localeCompare(first)
+          : first.localeCompare(second);
+      }
+  
+      if (typeof first === "number" && typeof second === "number") {
+        return sortDescriptor.direction === "descending" ? second - first : first - second;
+      }
+  
+      return 0;
     });
   }, [sortDescriptor, items]);
+  
+
+  // const sortedItems = React.useMemo(() => {
+  //   return [...items].sort((a: Address, b: Address) => {
+  //     const first = a[sortDescriptor.column as keyof Address] as number;
+  //     const second = b[sortDescriptor.column as keyof Address] as number;
+  //     const cmp = first < second ? -1 : first > second ? 1 : 0;
+
+  //     return sortDescriptor.direction === "descending" ? -cmp : cmp;
+  //   });
+  // }, [sortDescriptor, items]);
 
   const renderCell = React.useCallback(
     (address: Address, columnKey: React.Key) => {

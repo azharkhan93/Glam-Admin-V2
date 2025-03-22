@@ -72,23 +72,20 @@ export const ZodProductSchema = z.object({
     .string()
     .min(10, "Value must be 10 or more characters long")
     .max(1000, "Value must be less than 1000 characters long"),
+
   categoryId: z
-    .string()
-    .refine((value) => /^\d+$/.test(value), {
-      message: "Invalid category id",
-    }),
-  basePrice: z.preprocess(
-    (val) => Number(val),
-    z.number().min(1, "Enter a valid number")
-  ),
-  offerPrice: z.preprocess(
-    (val) => Number(val),
-    z.number().min(1, "Enter a valid number")
-  ),
+    .preprocess((val) => Number(val), z.number().int().positive("Invalid category id")),
+
+  basePrice: z.preprocess((val) => Number(val), z.number().int().min(0, "Base price cannot be negative")),
+
+  offerPrice: z.preprocess((val) => Number(val), z.number().int().min(0, "Offer price cannot be negative")),
+
   stock: z.preprocess(
-    (val) => Number(val),
-    z.number().min(0, "Enter a valid number")
+    (val) => (val === null || val === undefined ? 0 : Number(val)), 
+    z.number().int().min(0, "Stock must be a positive integer")
   ),
+  
+
   colors: z
     .object({
       color: z.string(),
@@ -96,8 +93,10 @@ export const ZodProductSchema = z.object({
       others: z.string().array(),
     })
     .array(),
+
   variantName: z.string().optional(),
   variantValues: z.string().optional(),
+
   keywords: z
     .string()
     .refine(
@@ -110,6 +109,7 @@ export const ZodProductSchema = z.object({
       }
     ),
 });
+
 
 
 

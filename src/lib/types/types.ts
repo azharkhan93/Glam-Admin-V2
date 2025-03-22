@@ -203,7 +203,7 @@ type EditProductProps = {
   shortDescription?: string | null;
   description: string;
   categoryId: number;
-  stock: number;
+  stock: number | null;
   basePrice: number;
   offerPrice: number;
   variantName?: string | null;

@@ -34,7 +34,7 @@ const Analytics = ({ product }: { product: Product & { Image: Image[] } }) => {
           color="text-[#F5B849]"
           icon={Boxes}
           title="Available Stocks"
-          value={product.stock}
+          value={product.stock ?? 0}
         />
         <SummaryCard
           bgcolor="bg-danger"
