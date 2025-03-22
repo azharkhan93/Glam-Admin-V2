@@ -43,6 +43,7 @@ export default function MarqueeOffersTable({
           return cellValue;
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
 

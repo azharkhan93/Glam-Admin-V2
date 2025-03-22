@@ -101,9 +101,9 @@ export async function POST(req: NextRequest) {
           
         },
       },
-      // include: {
-      //   Image: true, 
-      // },
+      include: {
+        Image: true, 
+      },
     });
     console.log("Created product:", product);
     return success200({ product });

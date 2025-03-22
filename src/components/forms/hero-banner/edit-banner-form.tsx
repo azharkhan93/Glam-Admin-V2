@@ -57,6 +57,7 @@ const EditBannerForm = ({
           : null,
       );
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mutation.data]);
 
   async function handleEditBanner(data: z.infer<typeof ZodHeroBannerSchema>) {

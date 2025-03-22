@@ -7,19 +7,39 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export const uploadImage = (
+
+export const uploadImage = async (
   image: string,
   slug: string,
   color: string,
   filename: string,
 ) => {
-  return cloudinary.uploader.upload(image, {
-    folder: "products",
-    public_id: `${slug}/${
-      color.toLowerCase() === "default" ? "" : color
-    }/${filename}`,
-  });
+  try {
+    console.log("Uploading image:", image);
+    const response = await cloudinary.uploader.upload(image, {
+      folder: "products",
+      public_id: `${slug}/${color.toLowerCase() === "default" ? "" : color}/${filename}`,
+    });
+    console.log("Cloudinary upload response:", response);
+    return response;
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    throw error;
+  }
 };
+// export const uploadImage = (
+//   image: string,
+//   slug: string,
+//   color: string,
+//   filename: string,
+// ) => {
+//   return cloudinary.uploader.upload(image, {
+//     folder: "products",
+//     public_id: `${slug}/${
+//       color.toLowerCase() === "default" ? "" : color
+//     }/${filename}`,
+//   });
+// };
 
 export const uploadBanner = (
   image: string,

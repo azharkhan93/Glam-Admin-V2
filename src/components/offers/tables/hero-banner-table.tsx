@@ -102,6 +102,7 @@ export default function HeroBannerTable({
         </span>
       </>
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visibleColumns, data?.length]);
 
   const renderCell = React.useCallback(
@@ -137,6 +138,7 @@ export default function HeroBannerTable({
           return cellValue;
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
 

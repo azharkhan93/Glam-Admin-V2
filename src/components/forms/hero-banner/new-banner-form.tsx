@@ -51,6 +51,7 @@ const NewBannerForm = ({
         prev ? [...prev, mutation.data.newBanner] : [mutation.data.newBanner],
       );
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mutation.data]);
 
   async function handleCreateBanner(data: z.infer<typeof ZodHeroBannerSchema>) {

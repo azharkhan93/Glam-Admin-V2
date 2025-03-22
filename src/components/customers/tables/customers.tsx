@@ -85,7 +85,7 @@ export default function Customers() {
     }
 
     return filteredUsers;
-  }, [filterValue, hasSearchFilter]);
+  }, [customers?.customers, filterValue, hasSearchFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -291,13 +291,7 @@ export default function Customers() {
         </div>
       </div>
     );
-  }, [
-    filterValue,
-    visibleColumns,
-    onSearchChange,
-    onRowsPerPageChange,
-    onClear,
-  ]);
+  }, [filterValue, onSearchChange, visibleColumns, customers?.customers.length, onRowsPerPageChange, onClear]);
 
   const bottomContent = React.useMemo(() => {
     return (
@@ -331,7 +325,7 @@ export default function Customers() {
         </div>
       </div>
     );
-  }, [page, pages, filteredItems.length, onNextPage, onPreviousPage]);
+  }, [page, pages, onNextPage, onPreviousPage]);
 
   return (
     <Table

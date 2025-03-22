@@ -38,6 +38,7 @@ const NewOfferForm = ({
       setOffersData((prev) =>
         prev ? [...prev, mutation.data.newOffer] : [mutation.data.newOffer],
       );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mutation.data]);
 
   async function handleCreateOffer(

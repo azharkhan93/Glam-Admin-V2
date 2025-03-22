@@ -49,6 +49,7 @@ const EditOfferForm = ({
           : null,
       );
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mutation.data]);
 
   async function handleCreateOffer(

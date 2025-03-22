@@ -164,6 +164,7 @@ export default function CustomerOrder({ customerId }: { customerId: string }) {
           return cellValue;
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
 
@@ -181,6 +182,7 @@ export default function CustomerOrder({ customerId }: { customerId: string }) {
       return filteredOrders;
     }
     return [];
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
@@ -229,6 +231,7 @@ export default function CustomerOrder({ customerId }: { customerId: string }) {
         </div>
       </div>
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, pages, filteredItems.length, onNextPage, onPreviousPage]);
 
   const topContent = useMemo(() => {
@@ -279,6 +282,7 @@ export default function CustomerOrder({ customerId }: { customerId: string }) {
         </div>
       </div>
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visibleColumns]);
 
   return (

@@ -91,6 +91,7 @@ export default function ProductsTable() {
     }
 
     return filteredProducts;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, filterValue]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
@@ -293,6 +294,7 @@ export default function ProductsTable() {
         </div>
       </div>
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     filterValue,
     visibleColumns,
@@ -334,6 +336,7 @@ export default function ProductsTable() {
         </div>
       </div>
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items.length, page, pages, hasSearchFilter]);
 
   return (

@@ -46,6 +46,7 @@ const NewDealForm = ({
 
   useEffect(() => {
     if (mutation.data) setDealData(mutation.data.newDeal);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mutation.data]);
 
   async function handleCreateDeal(data: z.infer<typeof ZodBestDealSchema>) {

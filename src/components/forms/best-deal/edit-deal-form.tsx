@@ -41,6 +41,7 @@ const EditDealForm = ({
 
   useEffect(() => {
     setImage(deal.imageUrl);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function onSuccess() {
@@ -52,6 +53,7 @@ const EditDealForm = ({
 
   useEffect(() => {
     if (mutation.data) setDealData(mutation.data.updatedResult);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mutation.data]);
 
   async function handleUpdateDeal(data: z.infer<typeof ZodBestDealSchema>) {

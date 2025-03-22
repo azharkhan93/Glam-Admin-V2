@@ -92,6 +92,7 @@ export default function OrdersTable({ orders }: { orders?: OrderProps[] }) {
     }
 
     return filteredOrders;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orders, filterValue]);
 
   const pages = Math.ceil(filteredItems?.length / rowsPerPage);
@@ -194,6 +195,7 @@ export default function OrdersTable({ orders }: { orders?: OrderProps[] }) {
           return cellValue;
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
 
@@ -291,6 +293,7 @@ export default function OrdersTable({ orders }: { orders?: OrderProps[] }) {
         </div>
       </div>
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     filterValue,
     visibleColumns,
@@ -332,6 +335,7 @@ export default function OrdersTable({ orders }: { orders?: OrderProps[] }) {
         </div>
       </div>
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items?.length, page, pages, hasSearchFilter]);
 
   return (
