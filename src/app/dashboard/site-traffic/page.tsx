@@ -12,12 +12,13 @@ const SiteTraffic = () => {
         <h1 className="text-zinc-400 md:text-xl">Traffic</h1>
         <VisitDetails />
         <div className="my-10 grid grid-cols-1 px-3 @3xl:grid-cols-2 md:gap-3">
-          <TopSources />
+          
           <TopPages />
+          <DeviceOrigin />
         </div>
         <div className="my-10 grid grid-cols-1 px-3 @3xl:grid-cols-2 md:gap-3">
-          <TopStateBySales />
-          <DeviceOrigin />
+        <TopSources />
+          {/* <DeviceOrigin /> */}
         </div>
       </div>
     </Nav>
