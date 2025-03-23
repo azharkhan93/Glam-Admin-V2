@@ -2,7 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { z } from "zod";
 import { ZodAuthSchema } from "@/lib/zod-schemas/schema";
-import axios from "@/config/axios.config"; 
+import axios from "axios";
+// import axios from "@/config/axios.config"; s
 
 async function handleLogin(values: z.infer<typeof ZodAuthSchema>) {
   const { data } = await axios.post("/api/login", values);
