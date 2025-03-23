@@ -1,7 +1,6 @@
 import { db } from "@/lib/prisma";
 import { error400, error500, success200 } from "@/lib/utils";
 import { ZodAuthSchema } from "@/lib/zod-schemas/schema";
-import { NextRequest } from "next/server";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
