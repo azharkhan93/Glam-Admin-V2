@@ -1,5 +1,6 @@
-export async function GET(req: Request) {
-    return new Response(JSON.stringify({message: "hello Imam from test route"}),
-    { status: 200}
+export async function GET(request: Request) {
+
+    return new Response(JSON.stringify({message: "hello iam from proteced"}),
+    {status: 200}
 )
 }
