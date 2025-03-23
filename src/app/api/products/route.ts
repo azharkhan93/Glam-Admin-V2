@@ -29,6 +29,7 @@ export async function GET() {
         },
       },
     });
+    console.log("Fetched products:", JSON.stringify(products, null, 2));
     
 
     return success200({
