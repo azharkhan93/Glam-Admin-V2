@@ -1,13 +1,10 @@
 import AuthForm from "@/components/forms/auth-form";
-// import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+
 import { Card, CardBody } from "@nextui-org/react";
-import { url } from "inspector";
+
 
 const SignIn = async () => {
-  // const session = await getServerSession(authOptions);
-  // if (session?.user) redirect("/dashboard");
+
 
   return (
     <div className="flex h-[100vh]  w-full items-center justify-center flex-col md:flex-row bg-white px-4">
