@@ -1,5 +1,5 @@
 import { Card, CardBody } from "@nextui-org/react";
-import { Loader2, RotateCw } from "lucide-react";
+import {  RotateCw } from "lucide-react";
 
 const Loading = () => {
   return (
