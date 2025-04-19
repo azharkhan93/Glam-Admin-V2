@@ -93,9 +93,9 @@ const Sidebar = () => {
             alt="icon"
             width={40}
             height={45}
-            style={{ width: "auto", height: "auto" }}
+            style={{ width: "95px", height: "95px" }}
           />
-          <span className="whitespace-pre text-xl">GadgeXhub</span>
+          <span className="whitespace-pre text-xl">GlamSquad</span>
         </div>
 
         <div className="flex h-full flex-col pb-32">
